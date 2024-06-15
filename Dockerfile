@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
 RUN apt update
-RUN apt install sniproxy dnsmasq iptables dnsdist -y #haproxy -y
+RUN apt install sniproxy dnsmasq iptables dnsdist haproxy -y
 ADD dnsmasq.conf /etc/dnsmasq.tpl
-#ADD haproxy.conf /etc/haproxy/haproxy.tpl
+ADD haproxy.conf /etc/haproxy/haproxy.tpl
 ADD sniproxy.conf /etc/sniproxy.conf
 ADD dnsdist.conf /etc/dnsdist/dnsdist.tpl
 RUN ln -sf /dev/stdout /var/log/sniproxy/sniproxy.log
@@ -30,8 +30,9 @@ CMD echo "Configure iptables..." && \
     echo "Configure dnsdist..." && \
     sed "s/{SERVER_DOMAIN}/${SERVER_DOMAIN}/g" /etc/dnsdist/dnsdist.tpl > /etc/dnsdist/dnsdist.conf && \
     chown -R _dnsdist:_dnsdist /etc/letsencrypt && \
-    #echo "Configure haproxy..." && \
-    #sed -e "s/{IP}/${IP}/" -e "s/{SERVER_DOMAIN}/${SERVER_DOMAIN}/" /etc/haproxy/haproxy.tpl > /etc/haproxy/haproxy.conf && \
-    echo "Run sniproxy, dnsdist and dnsmasq..." && \
+    echo "Configure haproxy..." && \
+    sed -e "s/{IP}/${IP}/" -e "s/{SERVER_DOMAIN}/${SERVER_DOMAIN}/" /etc/haproxy/haproxy.tpl > /etc/haproxy/haproxy.conf && \
+    echo "Run sniproxy, dnsdist, haproxy and dnsmasq..." && \
     service dnsdist start && \
+    service haproxy start && \
     dnsmasq -khR & sniproxy -c /etc/sniproxy.conf -f
