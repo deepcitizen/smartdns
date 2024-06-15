@@ -7,6 +7,14 @@ https://support.netfoundry.io/hc/en-us/articles/360057865692-Installing-Docker-a
 
 Так же для работы DoT вам необходимо зарегистрировать свой домен, направленный на ваш сервер
 
+Добавьте в файл `/etc/systemd/resolved.conf` строку `DNSStubListener=no`
+Перезагрузите `systemd-resolved` командой 
+```bash
+systemctl restart systemd-resolved
+```
+
+Измените файл `/etc/resolv.conf` так, чтобы он содержал следющую строку `nameserver 127.0.0.1` вместо `nameserver 127.0.0.53`
+
 ## Клонирование реозитория
 Склонируйте этот репозиторий
 ```bash
