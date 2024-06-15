@@ -13,7 +13,7 @@ https://support.netfoundry.io/hc/en-us/articles/360057865692-Installing-Docker-a
 git clone git@github.com:deepcitizen/smartdns.git
 ```
 
-Настройте файлы `domains.txt` и `dnsmasq.conf` для своего использования. 
+Настройте файлы `dnsmasq.conf` для своего использования. 
 В них указываются домены, которые будут проксироваться сервером
 
 ## Получения SSL сертификата
@@ -39,7 +39,7 @@ docker-compose up --build -d
 
 Enjoy!
 
-***Внимание! После внесения очередных изменений в файлы `domains.txt` и (или) `dnsmasq.conf` необходимо пересобрать проект***
+***Внимание! После внесения очередных изменений в файл `dnsmasq.conf` необходимо пересобрать проект***
 ```bash
 docker-compose up --build -d
 ```
