@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  smartdns:
+    build: .
+    image: smartdns:latest
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "53:53/udp"
+      - "443:443"
+      - "80:80"
+      - "853:853"
+    environment:
+      - IP=${IP}
+      - SERVER_DOMAIN=${SERVER_DOMAIN}
+    restart: always
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
