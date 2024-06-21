@@ -1,7 +1,7 @@
 #!/bin/bash
-ADBLOCK_DIR="~/adblock/repository"
+ADBLOCK_DIR="/adblock/repository"
 TARGET_DIR="$ADBLOCK_DIR/domains"
-OUTPUT_FILE="~/adblock/result.tpl"
+OUTPUT_FILE="/adblock/result.tpl"
 
 mkdir $ADBLOCK_DIR
 cd $ADBLOCK_DIR
