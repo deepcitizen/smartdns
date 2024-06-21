@@ -3,7 +3,7 @@ ADBLOCK_DIR="/adblock/repository"
 TARGET_DIR="$ADBLOCK_DIR/domains"
 OUTPUT_FILE="/adblock/result.tpl"
 
-mkdir $ADBLOCK_DIR
+mkdir -p $ADBLOCK_DIR
 cd $ADBLOCK_DIR
 git init
 git remote add -f origin https://github.com/Ultimate-Hosts-Blacklist/Ultimate.Hosts.Blacklist.git
