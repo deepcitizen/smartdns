@@ -17,3 +17,4 @@ services:
     restart: always
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
+      - /adblock/result.tpl:/adblock/result.tpl
