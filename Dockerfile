@@ -2,7 +2,6 @@ FROM ubuntu:latest
 
 RUN apt update
 RUN apt install sniproxy dnsmasq iptables dnsdist -y #haproxy -y
-ADD dnsmasq.conf /etc/dnsmasq.tpl
 #ADD haproxy.conf /etc/haproxy/haproxy.tpl
 ADD sniproxy.conf /etc/sniproxy.conf
 ADD dnsdist.conf /etc/dnsdist/dnsdist.tpl
@@ -26,7 +25,7 @@ CMD echo "Configure iptables..." && \
     iptables -P INPUT DROP && \
     iptables -S && \
     echo "Configure dnsmasq..." && \
-    cat /etc/dnsmasq.tpl /adblock/result.tpl > /etc/dnsmasq-candidate.tpl && \
+    cat /dnsmasq/conf/dnsmasq.conf /dnsmasq/conf/*.conf > /etc/dnsmasq-candidate.tpl && \
     sed "s/{IP}/${IP}/" /etc/dnsmasq-candidate.tpl > /etc/dnsmasq.conf && \
     echo "Configure dnsdist..." && \
     sed "s/{SERVER_DOMAIN}/${SERVER_DOMAIN}/g" /etc/dnsdist/dnsdist.tpl > /etc/dnsdist/dnsdist.conf && \

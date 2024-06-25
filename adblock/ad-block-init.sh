@@ -1,7 +1,7 @@
 #!/bin/bash
 ADBLOCK_DIR="/adblock/repository"
 TARGET_DIR="$ADBLOCK_DIR/domains"
-OUTPUT_FILE="/adblock/result.tpl"
+OUTPUT_FILE="/dnsmasq/adblock.conf"
 
 mkdir -p $ADBLOCK_DIR
 cd $ADBLOCK_DIR
