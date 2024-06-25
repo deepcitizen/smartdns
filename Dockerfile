@@ -25,7 +25,7 @@ CMD echo "Configure iptables..." && \
     iptables -P INPUT DROP && \
     iptables -S && \
     echo "Configure dnsmasq..." && \
-    cat /dnsmasq/conf/dnsmasq.conf /dnsmasq/conf/*.conf > /etc/dnsmasq-candidate.tpl && \
+    cat /dnsmasq/dnsmasq.conf /dnsmasq/conf/*.conf > /etc/dnsmasq-candidate.tpl && \
     sed "s/{IP}/${IP}/" /etc/dnsmasq-candidate.tpl > /etc/dnsmasq.conf && \
     echo "Configure dnsdist..." && \
     sed "s/{SERVER_DOMAIN}/${SERVER_DOMAIN}/g" /etc/dnsdist/dnsdist.tpl > /etc/dnsdist/dnsdist.conf && \
