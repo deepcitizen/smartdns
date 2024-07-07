@@ -36,4 +36,5 @@ CMD echo "Configure iptables..." && \
     service dnsdist start && \
     dnsmasq -khR
 
-RUN /usr/bin/nginx -c /nginx/nginx.conf
+RUN cp /nginx/nginx.conf /usr/local/nginx/conf/nginx.conf
+RUN /usr/bin/nginx
