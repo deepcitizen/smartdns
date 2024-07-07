@@ -4,7 +4,7 @@ cd /nginx
 tar -xzf ngx_http_proxy_connect_module.tar.gz
 tar -xzf nginx-1.25.5.tar.gz
 cd nginx-1.25.5
-apt install gcc libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev make -y
+apt install gcc libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev make patch -y
 
 groupadd www
 useradd -g www www
