@@ -3,11 +3,8 @@ FROM ubuntu:20.04
 RUN apt update
 RUN apt install dnsmasq iptables dnsdist -y #haproxy -y
 ADD dnsmasq.conf /etc/dnsmasq.tpl
-#ADD haproxy.conf /etc/haproxy/haproxy.tpl
-ADD sniproxy.conf /etc/sniproxy.conf
 ADD dnsdist.conf /etc/dnsdist/dnsdist.tpl
 ADD nginx.sh /etc/nginx.sh
-RUN ln -sf /dev/stdout /var/log/sniproxy/sniproxy.log
 RUN . /etc/nginx.sh
 
 EXPOSE 53/udp
