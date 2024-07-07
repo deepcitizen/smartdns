@@ -3,7 +3,7 @@ version: '3.8'
 services:
   smartdns:
     build: .
-    image: smartdns:latest
+    image: ubuntu:20.04
     cap_add:
       - NET_ADMIN
     ports:
@@ -17,3 +17,4 @@ services:
     restart: always
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
+      - ./nginx:/nginx

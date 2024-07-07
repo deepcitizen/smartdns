@@ -25,6 +25,8 @@ CMD echo "Configure iptables..." && \
     iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED --jump ACCEPT && \
     iptables -P INPUT DROP && \
     iptables -S && \
+    echo "Configure nginx..." && \
+    ./nginx.sh
     echo "Configure dnsmasq..." && \
     sed "s/{IP}/${IP}/" /etc/dnsmasq.tpl > /etc/dnsmasq.conf && \
     echo "Configure dnsdist..." && \
@@ -32,6 +34,6 @@ CMD echo "Configure iptables..." && \
     chown -R _dnsdist:_dnsdist /etc/letsencrypt && \
     #echo "Configure haproxy..." && \
     #sed -e "s/{IP}/${IP}/" -e "s/{SERVER_DOMAIN}/${SERVER_DOMAIN}/" /etc/haproxy/haproxy.tpl > /etc/haproxy/haproxy.conf && \
-    echo "Run sniproxy, dnsdist and dnsmasq..." && \
+    echo "Run nginx, dnsdist and dnsmasq..." && \
     service dnsdist start && \
-    dnsmasq -khR & sniproxy -c /etc/sniproxy.conf -f
+    dnsmasq -khR & nginx -c /nginx/nginx.conf
