@@ -26,7 +26,7 @@ CMD echo "Configure iptables..." && \
     iptables -P INPUT DROP && \
     iptables -S && \
     echo "Configure nginx..." && \
-    ./nginx.sh
+    ./nginx.sh &&\
     echo "Configure dnsmasq..." && \
     sed "s/{IP}/${IP}/" /etc/dnsmasq.tpl > /etc/dnsmasq.conf && \
     echo "Configure dnsdist..." && \
