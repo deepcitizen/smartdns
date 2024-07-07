@@ -1,12 +1,14 @@
 FROM ubuntu:20.04
 
 RUN apt update
-RUN apt install sniproxy dnsmasq iptables dnsdist -y #haproxy -y
+RUN apt install dnsmasq iptables dnsdist -y #haproxy -y
 ADD dnsmasq.conf /etc/dnsmasq.tpl
 #ADD haproxy.conf /etc/haproxy/haproxy.tpl
 ADD sniproxy.conf /etc/sniproxy.conf
 ADD dnsdist.conf /etc/dnsdist/dnsdist.tpl
+ADD nginx.sh /etc/nginx.sh
 RUN ln -sf /dev/stdout /var/log/sniproxy/sniproxy.log
+RUN . /etc/nginx.sh
 
 EXPOSE 53/udp
 EXPOSE 80
@@ -25,8 +27,6 @@ CMD echo "Configure iptables..." && \
     iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED --jump ACCEPT && \
     iptables -P INPUT DROP && \
     iptables -S && \
-    echo "Configure nginx..." && \
-    ./nginx.sh &&\
     echo "Configure dnsmasq..." && \
     sed "s/{IP}/${IP}/" /etc/dnsmasq.tpl > /etc/dnsmasq.conf && \
     echo "Configure dnsdist..." && \
@@ -36,4 +36,6 @@ CMD echo "Configure iptables..." && \
     #sed -e "s/{IP}/${IP}/" -e "s/{SERVER_DOMAIN}/${SERVER_DOMAIN}/" /etc/haproxy/haproxy.tpl > /etc/haproxy/haproxy.conf && \
     echo "Run nginx, dnsdist and dnsmasq..." && \
     service dnsdist start && \
-    dnsmasq -khR & nginx -c /nginx/nginx.conf
+    dnsmasq -khR
+
+RUN nginx -c /nginx/nginx.conf
