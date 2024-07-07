@@ -17,4 +17,4 @@ services:
     restart: always
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
-      - nginx:/nginx
+      - ./nginx:/nginx
