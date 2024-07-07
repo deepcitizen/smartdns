@@ -5,6 +5,7 @@ RUN apt install dnsmasq iptables dnsdist -y #haproxy -y
 ADD dnsmasq.conf /etc/dnsmasq.tpl
 ADD dnsdist.conf /etc/dnsdist/dnsdist.tpl
 ADD nginx.sh /etc/nginx.sh
+ADD nginx /nginx
 RUN . /etc/nginx.sh
 
 EXPOSE 53/udp
